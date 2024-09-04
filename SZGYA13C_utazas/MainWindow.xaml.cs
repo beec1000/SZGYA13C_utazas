@@ -26,7 +26,7 @@ namespace SZGYA13C_utazas
             utazo = Utazas.FromFile(@"..\..\..\src\utasadat.txt");
 
             //1.feladat
-            elsoF.Text = $"A buszra {utazo.Count.ToString()} utas akart felszáálni.";
+            elsoF.Text = $"A buszra {utazo.Count.ToString()} utas akart felszállni.";
             //2.feladat
         }
     }
