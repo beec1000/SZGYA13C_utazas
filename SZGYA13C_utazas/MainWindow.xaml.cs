@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace SZGYA13C_utazas
 {
@@ -22,7 +23,11 @@ namespace SZGYA13C_utazas
         {
             InitializeComponent();
 
-            utazo = Utazas.FromFile(@"..\..\..\src\utazasadat.txt");
+            utazo = Utazas.FromFile(@"..\..\..\src\utasadat.txt");
+
+            //1.feladat
+            elsoF.Text = $"A buszra {utazo.Count.ToString()} utas akart felszáálni.";
+            //2.feladat
         }
     }
 }
