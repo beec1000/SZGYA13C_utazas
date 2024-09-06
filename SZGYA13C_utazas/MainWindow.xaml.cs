@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
+using System.Globalization;
 
 namespace SZGYA13C_utazas
 {
@@ -25,10 +26,10 @@ namespace SZGYA13C_utazas
 
             utazo = Utazas.FromFile(@"..\..\..\src\utasadat.txt");
 
-            //1.feladat
+            //3.feladat
             harmadikF.Text = $"A buszra {utazo.Count.ToString()} utas akart felszállni.";
 
-            //2.feladat
+            //4.feladat
             int JegyNelkuli = 0;
             foreach (var i in utazo)
             {
@@ -55,12 +56,46 @@ namespace SZGYA13C_utazas
 
             negyedikF.Text = $"A buszra {(JegyNelkuli + LejartBerlet).ToString()} utas nem szállhatott fel.";
 
-            //3.feladat
-            foreach (var i in utazo)
-            {
+            //5.feladat
+            var Megallok = utazo.GroupBy(m => m.Megallo)
+            .OrderByDescending(g => g.Count())   
+            .First();
 
+            var x = Megallok.First();
+
+            foreach (var i in Megallok)
+            {
+                ötödikF.Text = $"A legtöbb utas ({Megallok.Count()} fő) a {i.Megallo}. megállóban próbált felszállni.";
             }
 
+            //6. feladat
+            int kedvezmenyesU = 0;
+            int ingyenesU = 0;
+
+            foreach (var i in utazo)
+            {
+                if (i.JegyBerletErvenyesseg.ToString().Length == 8)
+                {
+                    DateTime berletErvenyesseg = DateTime.ParseExact(i.JegyBerletErvenyesseg.ToString(), "yyyyMMdd", null);
+                    DateTime felszallasDatum = DateTime.ParseExact(i.FelszallasDatum.ToString("yyyyMMdd"), "yyyyMMdd", null);
+
+                    if (berletErvenyesseg > felszallasDatum)
+                    {
+                        if (i.JegyBerletTipus == "TAB" || i.JegyBerletTipus == "NYB")
+                        {
+                            kedvezmenyesU++;
+                        }
+                        if (i.JegyBerletTipus == "NYP" || i.JegyBerletTipus == "GYK" || i.JegyBerletTipus == "RVS")
+                        {
+                            ingyenesU++;
+                        }
+                    }
+                }
+            }
+
+
+            hatodikF.Text = $"Az ingyenesen utazók száma: {ingyenesU} fő \n" +
+                $"A kedvezményesen utazók száma {kedvezmenyesU} fő";
         }
     }
 }
