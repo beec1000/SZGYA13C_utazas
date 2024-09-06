@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
 using System.Globalization;
+using System.IO;
 
 namespace SZGYA13C_utazas
 {
@@ -96,6 +97,27 @@ namespace SZGYA13C_utazas
 
             hatodikF.Text = $"Az ingyenesen utazók száma: {ingyenesU} fő \n" +
                 $"A kedvezményesen utazók száma {kedvezmenyesU} fő";
+
+            //7. feladat
+            using StreamWriter sw = new StreamWriter(@"..\..\..\src\figyelmeztetes.txt");
+            {
+                foreach (var i in utazo)
+                {
+                    if (i.JegyBerletErvenyesseg.ToString().Length == 8)
+                    {
+                        DateTime berletErvenyesseg = DateTime.ParseExact(i.JegyBerletErvenyesseg.ToString(), "yyyyMMdd", null);
+                        DateTime felszallasDatum = DateTime.ParseExact(i.FelszallasDatum.ToString("yyyyMMdd"), "yyyyMMdd", null);
+
+                        if (berletErvenyesseg.Year == felszallasDatum.Year && 
+                            berletErvenyesseg.Month == felszallasDatum.Month && 
+                            (berletErvenyesseg.Day - felszallasDatum.Day) <= 3)
+                        {
+                            sw.WriteLine($"{i.EgyediAzonosito} {i.JegyBerletErvenyesseg}");
+                        }
+                    }
+                }
+            }
+
         }
     }
 }
