@@ -13,7 +13,7 @@ namespace SZGYA13C_utazas
         public DateTime FelszallasDatum { get; set; }
         public int EgyediAzonosito { get; set; }
         public string JegyBerletTipus { get; set; }
-        public int JegyBertelErvenyesseg { get; set; }
+        public int JegyBerletErvenyesseg { get; set; }
 
         public Utazas (int megallo, DateTime felszallasDatum, int egyediAzonosito, string jegyBerletTipus, int jegyBertelErvenyesseg)
         {
@@ -21,7 +21,7 @@ namespace SZGYA13C_utazas
             FelszallasDatum = felszallasDatum;
             EgyediAzonosito = egyediAzonosito;
             JegyBerletTipus = jegyBerletTipus;
-            JegyBertelErvenyesseg = jegyBertelErvenyesseg;
+            JegyBerletErvenyesseg = jegyBertelErvenyesseg;
         }
 
         public static List<Utazas> FromFile(string path)
@@ -50,7 +50,7 @@ namespace SZGYA13C_utazas
 
         public override string ToString()
         {
-            return $"{Megallo} | {FelszallasDatum} | {EgyediAzonosito} | {JegyBerletTipus} | {JegyBertelErvenyesseg}";
+            return $"{Megallo} | {FelszallasDatum} | {EgyediAzonosito} | {JegyBerletTipus} | {JegyBerletErvenyesseg}";
         }
     }
 }
