@@ -15,15 +15,17 @@
         </Grid.ColumnDefinitions>
         <Label Content="3. feladat" HorizontalAlignment="Left" Margin="60,50,0,0" VerticalAlignment="Top" Grid.Column="0"/>
         <TextBlock x:Name="harmadikF" HorizontalAlignment="Left" Margin="24,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" Grid.Column="0"/>
-        
+
         <Label Content="4. feladat" HorizontalAlignment="Left" Margin="60,50,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <TextBlock x:Name="negyedikF" HorizontalAlignment="Left" Margin="24,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" Grid.Column="1"/>
-        
+
         <Label Content="5. feladat" HorizontalAlignment="Left" Margin="60,50,0,0" VerticalAlignment="Top" Grid.Column="2"/>
         <TextBlock x:Name="ötödikF" HorizontalAlignment="Left" Margin="24,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" Grid.Column="2"/>
 
         <Label Content="6. feladat" HorizontalAlignment="Left" Margin="60,50,0,0" VerticalAlignment="Top" Grid.Column="3"/>
         <TextBlock x:Name="hatodikF" HorizontalAlignment="Left" Margin="24,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="130" Grid.Column="3"/>
+
+        <Button Grid.Column="3" Content="Open New Window" HorizontalAlignment="Left" Margin="36,272,0,0" VerticalAlignment="Top" Click="Button_Click"/>
 
     </Grid>
 </Window>
