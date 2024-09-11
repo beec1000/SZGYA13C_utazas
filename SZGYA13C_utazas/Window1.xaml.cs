@@ -27,15 +27,24 @@ namespace SZGYA13C_utazas
 
             utazo = Utazas.FromFile(@"..\..\..\src\utasadat.txt");
 
-            cmb1.Items.Add("Válasszon megállót!");
-            cmb1.SelectedIndex = 0;
+            string alapCMB = "Válasszon megállót!";
+
+            CMB1.Items.Add(alapCMB);
+            CMB1.SelectedIndex = 0;
 
             var megallok = utazo.Select(m => m.Megallo).Distinct().ToList();
-            foreach (var i in megallok)
-            {
-                cmb1.Items.Add(i);
-            }
-            
+            foreach (var i in megallok) CMB1.Items.Add(i);
+
+
+            CMB2.Items.Add(alapCMB);
+            CMB2.SelectedIndex = 0;
+
+            var berletTipusok = utazo.Select(t => t.JegyBerletTipus).Distinct().Where(t => t != "JGY").ToList();
+            foreach(var i in berletTipusok) CMB2.Items.Add(i);
+
+            DP1.SelectedDate = DateTime.Today;
+            DP2.SelectedDate = DateTime.Today;
+
         }
 
         private void TB2_TextChanged(object sender, TextChangedEventArgs e)
@@ -44,6 +53,55 @@ namespace SZGYA13C_utazas
 
             string kartyaszam = TB2.Text;
             TBl.Text = $"{kartyaszam.Length}db";
+        }
+
+        private void S1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            int sliderV = (int)Sli1.Value;
+            TB3.Text = $"{sliderV}db";
+        }
+
+        private void RBb_Checked(object sender, RoutedEventArgs e)
+        {
+            GBb.Visibility = Visibility.Visible;
+            GBj.Visibility = Visibility.Collapsed;
+        }
+
+        private void RBj_Checked(object sender, RoutedEventArgs e)
+        {
+            GBb.Visibility = Visibility.Collapsed;
+            GBj.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (CMB1.SelectedIndex == 0)
+            {
+                MessageBox.Show("Nem választott megállót!", "Configuration", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            //nincs értelme, de itt van
+            //if (DP1.SelectedDate == DP1.SelectedDate)
+            //{
+            //    MessageBox.Show("Nem adott dátumot!", "Configuration", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //}
+
+            if (TB2.Text.Length != 7)
+            {
+                MessageBox.Show("A kártya azonosítója nem 7 karakter hosszú!", "Configuration", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            if (TB2.Text != string.Empty && int.Parse(TB2.Text) < 0)
+            {
+                MessageBox.Show("A kártya azonosítója nem lehet negatív szám!", "Configuration", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            if (CMB2.SelectedIndex == 0)
+            {
+                MessageBox.Show("Nem választott bérlet típust!", "Configuration", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            if (DP2.SelectedDate == DateTime.Today)
+            {
+                MessageBox.Show("Nem adta meg a bérlet érvényességi idejét!", "Configuration", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }
