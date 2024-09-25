@@ -62,8 +62,6 @@ namespace SZGYA13C_utazas
             .OrderByDescending(g => g.Count())   
             .First();
 
-            var x = Megallok.First();
-
             foreach (var i in Megallok)
             {
                 ötödikF.Text = $"A legtöbb utas ({Megallok.Count()} fő) a {i.Megallo}. megállóban próbált felszállni.";
